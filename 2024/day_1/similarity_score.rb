@@ -4,12 +4,12 @@ class SimilarityScore
   end
 
   def calculate
-    @locations.first_list.sum { |location_id| calculate_similarity(location_id) }
+    @locations.first_list.sum { |location_id| similarity(location_id) }
   end
 
   private
 
-  def calculate_similarity(location_id)
+  def similarity(location_id)
     appearances_on_second_list(location_id) * location_id
   end
 
