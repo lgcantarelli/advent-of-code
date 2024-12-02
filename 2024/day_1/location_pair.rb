@@ -4,11 +4,7 @@ class LocationPair
     @location2 = location2
   end
 
-  def distance
-    (@location1 - @location2).abs
-  end
-
-  def self.build(locations)
+  def self.generate(locations)
     first_list = locations.first_list.sort
     second_list = locations.second_list.sort
 
@@ -16,5 +12,13 @@ class LocationPair
       location2 = second_list[index]
       new(location1, location2)
     end
+  end
+
+  def self.total_distance(locations)
+    self.generate(locations).map(&:distance).sum
+  end
+
+  def distance
+    (@location1 - @location2).abs
   end
 end
