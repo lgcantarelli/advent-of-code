@@ -5,6 +5,16 @@ class RedNosedReports
     @reports = Report.parse_and_load
   end
 
+  def print
+    init = Time.now
+    p "Safe Reports Count: #{safe_reports_count}"
+
+    time = Time.now - init
+    p "Executed in #{time * 1000}ms"
+  end
+
+  private
+
   def safe_reports_count
     count = 0
     @reports.each do |report|
@@ -12,14 +22,6 @@ class RedNosedReports
     end
 
     count
-  end
-
-  def print
-    init = Time.now
-    p "Safe Reports Count: #{safe_reports_count}"
-
-    time = Time.now - init
-    p "Executed in #{time * 1000}ms"
   end
 end
 
