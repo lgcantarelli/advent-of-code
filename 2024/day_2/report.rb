@@ -3,49 +3,26 @@ require_relative 'report/parseable'
 class Report
   include Parseable
 
-  attr_accessor :levels
-
   def initialize(levels:)
     @levels = levels
   end
 
   def safe?
-    (increasing_levels? || decreasing_levels?) && no_outlier_level?
+    (increasing_levels? || decreasing_levels?) && !outlier_level_found?
   end
 
   private
 
     def increasing_levels?
-      decreasing_levels_found = false
-
-      @levels.each_with_index do |level, index|
-        next_level = @levels[index + 1]
-
-        if next_level
-          decreasing_levels_found = level > next_level
-          break if decreasing_levels_found
-        end
-      end
-
-      !decreasing_levels_found
+      @levels.sort == @levels
     end
 
     def decreasing_levels?
-      increasing_levels_found = false
-
-      @levels.each_with_index do |level, index|
-        next_level = @levels[index + 1]
-
-        if next_level
-          increasing_levels_found = level < next_level
-          break if increasing_levels_found
-        end
-      end
-
-      !increasing_levels_found
+      descending_sorted_levels = @levels.sort_by { |level| -level }
+      descending_sorted_levels == @levels
     end
 
-    def no_outlier_level?
+    def outlier_level_found?
       outlier_found = false
 
       @levels.each_with_index do |level, index|
