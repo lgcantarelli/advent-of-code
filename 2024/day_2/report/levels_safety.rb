@@ -29,7 +29,7 @@ class Report
           end
         end
 
-        !outlier_found
+        outlier_found
       end
   end
 end
