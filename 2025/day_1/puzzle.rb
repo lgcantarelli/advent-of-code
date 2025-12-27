@@ -10,8 +10,8 @@ class Puzzle
   def solve
     password = 0
 
-    @sequence.each do |direction, size|
-      points_at = @dial.rotate(direction, size)
+    @sequence.each do |direction, distance|
+      points_at = @dial.rotate(direction, distance)
       password += 1 if points_at.zero?
     end
     
