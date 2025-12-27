@@ -11,9 +11,7 @@ class Puzzle
     password = 0
 
     @sequence.each do |direction, size|
-      p "#{direction}, #{size}"
       points_at = @dial.rotate(direction, size)
-      p "points at: #{points_at}"
       password += 1 if points_at.zero?
     end
     
@@ -21,5 +19,6 @@ class Puzzle
   end
 end
 
-puzzle = Puzzle.new
-p puzzle.solve
+answer = 1066
+result = Puzzle.new.solve
+p "Result is #{result}. Is this correct? #{answer == result}."

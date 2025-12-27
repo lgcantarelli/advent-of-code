@@ -15,9 +15,9 @@ class Sequence
       [].tap do |parsed_sequence|
         File.readlines('sequence.txt').each do |rotation|
           direction = rotation[0]
-          size = rotation.split(direction)[1].strip.to_i
+          distance = rotation.split(direction)[1].strip.to_i
 
-          parsed_sequence << [direction, size]
+          parsed_sequence << [direction, distance]
         end
       end
     end
